@@ -10,6 +10,16 @@ on:
 permissions:
   contents: read
 
+env:
+  # Not secret: this is the account's SSH endpoint, visible to anyone who has
+  # cPanel access on this account. Only the private key actually grants entry.
+  SSH_HOST: 66.29.148.182
+  SSH_USER: lftoeuiwlb
+  SSH_PORT: "21098"
+  # amazinglashesandspa.com is an addon domain on this cPanel account, so its
+  # document root is a dedicated folder rather than public_html.
+  WEB_ROOT: /home/lftoeuiwlb/amazinglashesandspa.com/
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -41,12 +51,23 @@ jobs:
           name: dist
           path: dist
 
-      - name: Deploy to cPanel
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.CPANEL_FTP_SERVER }}
-          username: ${{ secrets.CPANEL_FTP_USERNAME }}
-          password: ${{ secrets.CPANEL_FTP_PASSWORD }}
-          protocol: ftps
-          local-dir: ./dist/
-          server-dir: ${{ vars.CPANEL_SERVER_DIR || '/public_html/' }}
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          if ! ssh-keygen -y -f ~/.ssh/id_deploy > /dev/null 2>&1; then
+            echo "::error::SSH_PRIVATE_KEY is not a valid private key."
+            exit 1
+          fi
+          ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to cPanel via rsync
+        run: |
+          rsync -avz --delete \
+            --exclude 'cgi-bin' \
+            --exclude '.well-known' \
+            -e "ssh -i ~/.ssh/id_deploy -p $SSH_PORT" \
+            dist/ "$SSH_USER@$SSH_HOST:$WEB_ROOT"
