@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&family=Inter:wght@300;400;500;600&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Jost", "system-ui", sans-serif;
+  --font-body: "Inter", "system-ui", sans-serif;
+
+  --color-brand-50: #f7f7f8;
+  --color-brand-100: #eeeef0;
+  --color-brand-200: #dcdce0;
+  --color-brand-300: #b9b9c0;
+  --color-brand-400: #9a9aa3;
+  --color-brand-500: #8b8d94;
+  --color-brand-600: #6f7077;
+  --color-brand-700: #55565c;
+  --color-brand-800: #3a3b40;
+  --color-brand-900: #202024;
+
+  --color-blush-50: #fdf3f8;
+  --color-blush-100: #fbe6f0;
+  --color-blush-200: #f6c9e0;
+  --color-blush-300: #eea0c8;
+  --color-blush-400: #e26fac;
+  --color-blush-500: #d1478e;
+  --color-blush-600: #b22d72;
+  --color-blush-700: #8f215b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-brand-800);
+  background-color: #fff;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+details > summary {
+  list-style: none;
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
