@@ -16,7 +16,7 @@ const photos = [
 
 export default function Gallery() {
   return (
-    <section className="py-16 md:py-20 bg-white">
+    <section className="py-16 md:py-20">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-8 md:mb-10">
           <p className="font-display uppercase tracking-[0.25em] text-blush-500 text-xs md:text-sm mb-3">

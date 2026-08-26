@@ -10,7 +10,7 @@ const features = [
 
 export default function Welcome() {
   return (
-    <section className="py-16 md:py-24 bg-white">
+    <section className="py-16 md:py-24">
       <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div className="mx-auto max-w-md lg:max-w-none order-1">
           <img
