@@ -40,6 +40,7 @@ jobs:
           name: dist
           path: dist
           retention-days: 5
+          include-hidden-files: true
 
   deploy:
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
