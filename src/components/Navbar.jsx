@@ -66,7 +66,7 @@ export default function Navbar() {
     </header>
 
       {open && (
-        <div className="md:hidden fixed inset-x-0 top-16 bottom-0 z-40 bg-white overflow-y-auto">
+        <div className="md:hidden fixed inset-x-0 top-16 bottom-0 z-50 bg-white overflow-y-auto">
           <nav className="flex flex-col px-6 pt-6 pb-8 gap-1">
             {NAV_LINKS.map((link) => (
               <NavLink
