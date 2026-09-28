@@ -14,11 +14,11 @@ env:
   # Not secret: this is the account's SSH endpoint, visible to anyone who has
   # cPanel access on this account. Only the private key actually grants entry.
   SSH_HOST: 66.29.148.182
-  SSH_USER: lftoeuiwlb
+  SSH_USER: xwsnjsjcer
   SSH_PORT: "21098"
   # amazinglashesandspa.com is an addon domain on this cPanel account, so its
   # document root is a dedicated folder rather than public_html.
-  WEB_ROOT: /home/lftoeuiwlb/amazinglashesandspa.com/
+  WEB_ROOT: /home/xwsnjsjcer/amazinglashesandspa.com/
 
 jobs:
   build:
